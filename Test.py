@@ -16,3 +16,5 @@ print(date)
 
 month, date = get_date()
 print(month)
+
+print('test from cli')
