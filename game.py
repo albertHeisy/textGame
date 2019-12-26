@@ -23,6 +23,11 @@ class RustySword:
 		self.damage = 20
 	def __str__(self):
 		return self.name
+class Axe:
+    def __init__(self):
+        self.name = 'Axe'
+        self.description = 'Design for cutting wood, '\
+                                                        'maby can chop off parts of boy.'
 
 def get_player_command():
     return input('Action: ')
