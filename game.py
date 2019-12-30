@@ -1,5 +1,10 @@
 # Any class that inherits from Weapon will automatically get the same behavior of the Weapon class for free
 class Weapon:
+    # namjerno stvaranje exceptionsa da se podsjetimo na neke stvari 
+    # Za lakse debuganje kassnije ako napravimo gresku
+    def __init__(self):
+        raise NotImplementedError('Do not create raw Weapon objects.')
+
     def __str__(self):
         return self.name    
 
@@ -29,6 +34,21 @@ class Axe(Weapon):
         self.description = 'Design for cutting wood, '\
                                                         'maby can chop off parts of boy.'
 
+# vraca najjace oruzje u inventoriju
+def most_powerfull_weapon(inventory):   
+    max_damage = 0
+    best_weapon = None
+    for item in inventory:
+        # ovaj exception handlig je zato kaj u inv nisu sve klase 
+        # pa tako nemaju svi .damage
+        try:
+            if item.damage > max_damage:
+                best_weapon = item.name
+                max_damage = item.damage
+        except AttributeError: # ovaj error se pojavi kad nisu svi kalse    
+            pass
+    return best_weapon 
+
 def get_player_command():
     return input('Action: ')
 
@@ -52,6 +72,8 @@ def play():
         elif action_input == 'q':
             print('You exied the game')
             break
+        elif action_input == 'best':
+            print(most_powerfull_weapon(inventory))
         else:
             print("Invalid action!")
 
